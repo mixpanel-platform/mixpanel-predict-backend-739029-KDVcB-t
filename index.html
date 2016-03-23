@@ -17,7 +17,7 @@
     // Set a global variable for the Custom Query result
     var cqResults = {};
     
-    function runQueries() {
+    var runQueries = function() {
         $('#path svg').hide()
         median = function( numArr ) {
           numArr = numArr.filter(Number);
