@@ -41,7 +41,6 @@
         
         MP.api.custom_query(scriptA).done(function(results) {
             cqResults.A = median(results) || -1;
-            console.log(cqResults)
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
@@ -55,7 +54,8 @@
         MP.api.custom_query(scriptD).done(function(results) {
             cqResults.D = median(results) || -1;
         });
-        
+      
+      console.log(cqResults)
       $('<div></div>').appendTo('body').MPTable({
         firstColHeader: 'Median Per-Project Variance',
         data: cqResults,
