@@ -61,6 +61,7 @@
     $(document).ready(function() {
       runQueries()
         console.log("done")
+        console.log(cqResults)
         $('<div></div>').appendTo('body').MPTable({
           firstColHeader: 'Median Per-Project Variance',
           data: cqResults,
