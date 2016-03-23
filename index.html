@@ -48,19 +48,17 @@
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
-            cqResults.B = {"Median project variance": median(results) || -1, 
-                          "Count projects": results.filter(Number).length,};
+            cqResults.B = structureChartData(results);
         });
 
         MP.api.custom_query(scriptC).done(function(results) {
-            cqResults.C = {"Median project variance": median(results) || -1, 
-                          "Count projects": results.filter(Number).length,};
+            cqResults.C = structureChartData(results);
         });
 
         MP.api.custom_query(scriptD).done(function(results) {
-            cqResults.D = {"Median project variance": median(results) || -1, 
-                          "Count projects": results.filter(Number).length,};
+            cqResults.D = structureChartData(results);
             
+            // now that we have all the results, make the table
             $('<div></div>').appendTo('body').MPTable({
               firstColHeader: 'Grade',
               data: cqResults,
