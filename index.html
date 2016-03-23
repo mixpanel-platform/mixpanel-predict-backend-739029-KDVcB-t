@@ -59,8 +59,7 @@
     }
     
     $(document).ready(function() {
-      runQueries().done(function() { 
-        console.log(cqResults);
+      runQueries()
         console.log("done")
         $('<div></div>').appendTo('body').MPTable({
           firstColHeader: 'Median Per-Project Variance',
