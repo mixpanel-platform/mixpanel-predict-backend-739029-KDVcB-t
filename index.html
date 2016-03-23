@@ -51,7 +51,7 @@
             cqResults.D = [median(results) || -1, results.filter(Number).length];
             
             $('<div></div>').appendTo('body').MPTable({
-              firstColHeader: ['Grade', 'Median Per-Project Variance', 'Count of projects']
+              firstColHeader: ['Grade', 'Median Per-Project Variance', 'Count of projects'],
               data: cqResults,
             })        
         });
