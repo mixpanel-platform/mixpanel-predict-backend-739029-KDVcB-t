@@ -36,7 +36,7 @@
         scriptD = $.trim(scriptD);
         
         MP.api.custom_query(scriptA).done(function(results) {
-            cqResults.A = median(results) || -1;
+            cqResults.A = [median(results) || -1, length(results)];
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
