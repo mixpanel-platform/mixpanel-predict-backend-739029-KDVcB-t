@@ -40,15 +40,15 @@
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
-            cqResults.B = median(results) || -1;
+            cqResults.B = [median(results) || -1, results.length];
         });
 
         MP.api.custom_query(scriptC).done(function(results) {
-            cqResults.C = median(results) || -1;
+            cqResults.C =[median(results) || -1, results.length];
         });
 
         MP.api.custom_query(scriptD).done(function(results) {
-            cqResults.D = median(results) || -1;
+            cqResults.D = [median(results) || -1, results.length];
             $('<div></div>').appendTo('body').MPTable({
               firstColHeader: 'Median Per-Project Variance',
               data: cqResults,
