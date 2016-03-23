@@ -26,7 +26,7 @@
             return (numArr[half-1] + numArr[half]) / 2.0;
           }
         
-        structureChartData = function ( resultsArr ) {
+        structureChartData = function ( results ) {
         return {"Median project variance": median(results) || -1, 
                 "Count projects": results.filter(Number).length,
           
