@@ -49,6 +49,7 @@
 
         MP.api.custom_query(scriptD).done(function(results) {
             cqResults.D = [median(results) || -1, results.filter(Number).length];
+            
             $('<div></div>').appendTo('body').MPTable({
               firstColHeader: ['Grade', 'Median Per-Project Variance', 'Count of projects']
               data: cqResults,
