@@ -60,7 +60,7 @@
             
             // now that we have all the results, make the table
             $('<div></div>').appendTo('body').MPTable({
-              firstColHeader: 'Grade',
+              firstColHeader: 'Grades from {1}'.format({5}),
               data: cqResults,
             })
         });
