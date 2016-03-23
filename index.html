@@ -59,9 +59,9 @@
             cqResults.D = structureChartData(results);
             
             // now that we have all the results, make the table
-            intervals_since_start = Math.round((new Date().getTime() - 1458689450000)/1000/3600/4)
+            intervals_since_start = Math.floor((new Date().getTime() - 1458689450000)/1000/3600/4)
             $('<div></div>').appendTo('body').MPTable({
-              firstColHeader: 'Grades from '.concat(intervals_since_start).concat(" runs"),
+              firstColHeader: 'Grades from '.concat(intervals_since_start).concat(" full runs"),
               data: cqResults,
             })
         });
