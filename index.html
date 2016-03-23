@@ -27,7 +27,7 @@
         console.log("running query")
         MP.api.custom_query(script).done(function(results) {
             cqResult = results[0];
-            console.log(cqResult)
+            console.log(results)
 
             median = function( numArr ) {
               numArr.sort( function(a,b) {return a - b;} );
