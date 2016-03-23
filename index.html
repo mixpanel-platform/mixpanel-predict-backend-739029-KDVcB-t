@@ -40,6 +40,7 @@
         scriptD = $.trim(scriptD);
         
         MP.api.custom_query(scriptA).done(function(results) {
+            console.log("Got A")
             cqResults.A = median(results) || -1;
         });
 
