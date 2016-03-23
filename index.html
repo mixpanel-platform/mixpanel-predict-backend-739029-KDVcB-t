@@ -59,7 +59,7 @@
     }
     
     $(document).ready(function() {
-      runQueries().done(function(cqResults){ 
+      runQueries().done(function() { 
         console.log(cqResults);
         console.log("done")
         $('<div></div>').appendTo('body').MPTable({
