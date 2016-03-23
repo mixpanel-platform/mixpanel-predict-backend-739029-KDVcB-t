@@ -17,7 +17,7 @@
     // Set a global variable for the Custom Query result
     var cqResults = {};
     
-    var runQueries = function() {
+    function runQueries() {
         $('#path svg').hide()
         median = function( numArr ) {
           numArr = numArr.filter(Number);
@@ -59,14 +59,15 @@
     }
     
     $(document).ready(function() {
-      results = runQueries()
-      console.log("ran")
-      console.log(results);
+      runQueries().done(function(cqResults){ 
+        console.log(cqResults);
+        console.log("done")
         $('<div></div>').appendTo('body').MPTable({
           firstColHeader: 'Median Per-Project Variance',
           data: cqResults,
         })
       });
+    });
   </script>
     
   <script type="text/cq" id="cqA">
