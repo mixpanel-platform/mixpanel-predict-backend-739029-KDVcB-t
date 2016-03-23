@@ -55,16 +55,17 @@
         MP.api.custom_query(scriptD).done(function(results) {
             cqResults.D = median(results) || -1;
         });
+        return cqResults
+    }
+    
+    $(document).ready(function() {
+      runQueries().done(function(cqResults){ 
         console.log(cqResults);
-
         $('<div></div>').appendTo('body').MPTable({
           firstColHeader: 'Median Per-Project Variance',
           data: cqResults,
         })
-    }
-    
-    $(document).ready(function() {
-      runQueries();
+      });
     });
   </script>
     
