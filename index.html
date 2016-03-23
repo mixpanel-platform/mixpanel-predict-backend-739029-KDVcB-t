@@ -15,18 +15,18 @@
     
     <script>
     // Set a global variable for the Custom Query result
-    var cqResult;
+    var cqResultA;
+    var cqResultD;
 
-    function runQuery() {
+    function runQueries() {
         $('#path svg').hide();
         // grab the Custom Query script as a string
-        var script = $('#cq').html();
+        var scriptA = $('#cqA').html();
         // trim all extra whitespace using jQuery trim
-        script = $.trim(script);
+        scriptA = $.trim(scriptA);
         // grab the parameters from the inputs we defined
-        console.log("running query")
-        MP.api.custom_query(script).done(function(results) {
-            cqResult = results[0];
+        MP.api.custom_query(scriptA).done(function(results) {
+            cqResult = results;
             console.log(results)
 
             median = function( numArr ) {
@@ -45,14 +45,35 @@
             })
             
         });
+        
+        MP.api.custom_query(scriptD).done(function(results) {
+            cqResult = results;
+            console.log(results)
+
+            median = function( numArr ) {
+              numArr.sort( function(a,b) {return a - b;} );
+              var half = Math.floor(numArr.length/2);
+              if(numArr.length % 2)
+                return numArr[half];
+              else
+                return (numArr[half-1] + numArr[half]) / 2.0;
+              }
+            console.log(median(results))
+            
+            $('<div></div>').appendTo('body').MPTable({
+              firstColHeader: 'Median Per-Project Variance',
+              data: {"D lift": median(results)},
+            })
+            
+        });        
     }
     
     $(document).ready(function() {
-      runQuery();
+      runQueries();
     });
     </script>
     
-    <script type="text/cq" id="cq">
+    <script type="text/cq" id="cqA">
 getLift = function ( event, letter ) {
     return event.properties["lift-".concat(letter)];
 },
@@ -76,5 +97,33 @@ function main() {
   });
 }
     </script>
+
+    <script type="text/cq" id="cqD">
+getLift = function ( event, letter ) {
+    return event.properties["lift-".concat(letter)];
+},
+getALift = function (item) {
+  return getLift(item, "D");
+};
+
+function main() {
+  return Events({
+    to_date: new Date().toISOString().split("T")[0],
+    from_date: "2016-03-22", // new Date().toISOString().split("T")[0],
+  })
+  .filter(function(e) {
+    return e.name == "Baseline performance";
+  })
+  .groupBy(["properties.project-id"], mixpanel.reducer.numeric_summary(getALift))
+  .map(function(project) {
+    summary = project.value;
+    project_id = project.key[0];
+    return summary.sum_squares / (summary.count - 1);
+  });
+}
+    </script>
+
+
+
   </body>
 </html>
