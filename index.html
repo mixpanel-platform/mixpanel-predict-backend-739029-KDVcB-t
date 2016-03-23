@@ -58,8 +58,10 @@
         MP.api.custom_query(scriptD).done(function(results) {
             cqResults.D = structureChartData(results);
             
+            // compute the number of intevals (4 hours) since 3/22/16 at 4:30pm PST when metrics started to 1 decimal
+            intervals_since_start = Math.round((new Date().getTime() - 1458689450000)/1000/3600/4*10)/10
+            
             // now that we have all the results, make the table
-            intervals_since_start = Math.round((new Date().getTime() - 1458689450000)/1000/3600/4*100)/100
             $('<div></div>').appendTo('body').MPTable({
               firstColHeader: 'Grades from '.concat(intervals_since_start).concat(" full runs"),
               data: cqResults,
