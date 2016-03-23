@@ -15,6 +15,7 @@
     
     function runQueries() {
         $('#path svg').hide()
+        
         median = function( numArr ) {
           numArr = numArr.filter(Number);
           numArr.sort( function(a,b) {return a - b;} );
@@ -24,6 +25,13 @@
           else
             return (numArr[half-1] + numArr[half]) / 2.0;
           }
+        
+        structureChartData = function ( resultsArr ) {
+        return {"Median project variance": median(results) || -1, 
+                "Count projects": results.filter(Number).length,
+          
+                };
+        }  
         
         // grab the Custom Query script as a string
         var scriptA = $('#cqA').html();
@@ -36,20 +44,22 @@
         scriptD = $.trim(scriptD);
         
         MP.api.custom_query(scriptA).done(function(results) {
-            cqResults.A = {"Median project variance": median(results) || -1, 
-                          "Count projects": results.filter(Number).length,};
+            cqResults.A = structureChartData(results);
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
-            cqResults.B = [median(results) || -1, results.filter(Number).length];
+            cqResults.B = {"Median project variance": median(results) || -1, 
+                          "Count projects": results.filter(Number).length,};
         });
 
         MP.api.custom_query(scriptC).done(function(results) {
-            cqResults.C =[median(results) || -1, results.filter(Number).length];
+            cqResults.C = {"Median project variance": median(results) || -1, 
+                          "Count projects": results.filter(Number).length,};
         });
 
         MP.api.custom_query(scriptD).done(function(results) {
-            cqResults.D = [median(results) || -1, results.filter(Number).length];
+            cqResults.D = {"Median project variance": median(results) || -1, 
+                          "Count projects": results.filter(Number).length,};
             
             $('<div></div>').appendTo('body').MPTable({
               firstColHeader: 'Grade',
