@@ -24,7 +24,6 @@
         var scriptA = $('#cqA').html();
         // trim all extra whitespace using jQuery trim
         scriptA = $.trim(scriptA);
-        // grab the parameters from the inputs we defined
         MP.api.custom_query(scriptA).done(function(results) {
             cqResult = results;
             console.log(results)
@@ -46,8 +45,12 @@
             
         });
         
+        $('#path svg').hide();
+        // grab the Custom Query script as a string
+        var scriptD = $('#cqD').html();
+        // trim all extra whitespace using jQuery trim
+        scriptD = $.trim(scriptD);
         MP.api.custom_query(scriptD).done(function(results) {
-            cqResult = results;
             console.log(results)
 
             median = function( numArr ) {
