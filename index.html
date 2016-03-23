@@ -36,21 +36,21 @@
         scriptD = $.trim(scriptD);
         
         MP.api.custom_query(scriptA).done(function(results) {
-            cqResults.A = [median(results) || -1, results.length];
+            cqResults.A = [median(results) || -1, results.filter(Number).length];
         });
 
         MP.api.custom_query(scriptB).done(function(results) {
-            cqResults.B = [median(results) || -1, results.length];
+            cqResults.B = [median(results) || -1, results.filter(Number).length];
         });
 
         MP.api.custom_query(scriptC).done(function(results) {
-            cqResults.C =[median(results) || -1, results.length];
+            cqResults.C =[median(results) || -1, results.filter(Number).length];
         });
 
         MP.api.custom_query(scriptD).done(function(results) {
-            cqResults.D = [median(results) || -1, results.length];
+            cqResults.D = [median(results) || -1, results.filter(Number).length];
             $('<div></div>').appendTo('body').MPTable({
-              firstColHeader: 'Median Per-Project Variance',
+              firstColHeader: ['Grade', 'Median Per-Project Variance', 'Count of projects']
               data: cqResults,
             })        
         });
